@@ -12,6 +12,7 @@ const DisplayBreachedAccount: React.FC<DisplayBreachedAccountProps> = ({breached
 
     useEffect(() => {
         setTotalItems(breachedAccounts.length);
+        setItemsPerPage(10);
 
     }, [breachedAccounts]);
 
@@ -44,23 +45,34 @@ const DisplayBreachedAccount: React.FC<DisplayBreachedAccountProps> = ({breached
             <div className="flex flex-col gap-10">
                 <div>
                     {
-                        totalItems > 0 ?
-                            (<h1 className={"text-4xl text-red-700 font-bold"}>oh no -- pwned in {totalItems} data breaches !!</h1>)
+
+                        breachedAccounts.length ?
+
+                            (
+                                <h1 className={"text-4xl text-red-500 font-bold"}>oh no -- pwned in {totalItems} data breaches !</h1>
+                            )
                             :
-                            (<h1 className={"text-2xl text-green-800 font-bold"}>no breaches found</h1>)
+                            (
+                                <h1 className={"text-2xl text-green-800 font-bold"}>no breaches found</h1>
+                            )
                     }
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                     {displayBreached()}
                 </div>
                 <div className="flex flex-row gap-4">
-                    <Pagination
-                        current={currentPage}
-                        pageSize={itemsPerPage}
-                        total={totalItems}
-                        onChange={handlePageChange}
-                        className="mt-4"
-                    />
+                    {
+                        totalItems >= 1 ?
+                            (<Pagination
+                                current={currentPage}
+                                pageSize={itemsPerPage}
+                                total={totalItems}
+                                onChange={handlePageChange}
+                                className="mt-4"
+                            />)
+                            :
+                            (<></>)
+                    }
                 </div>
             </div>
         </>

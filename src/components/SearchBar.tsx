@@ -12,7 +12,7 @@ const SearchBar: React.FC<SearchBarProps> = ({handleOnSearch, loading}) => {
         <>
             <Search
                 placeholder="enter your email address"
-                enterButton="pwned?"
+                enterButton={<span className={"text-red-700 font-extrabold"}>pwned?</span>}
                 onSearch={handleOnSearch}
                 loading={loading}
                 allowClear
