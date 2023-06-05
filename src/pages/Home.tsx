@@ -12,6 +12,7 @@ const Home: React.FC = () => {
         async () => axios.get('http://localhost:8000/probe_proxy/breached/' + searchValue),
         false,
         (data) => {
+            console.log(data)
             setBreachedAccounts(data);
         }
     );
